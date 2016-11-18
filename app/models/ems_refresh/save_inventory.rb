@@ -21,7 +21,7 @@ module EmsRefresh::SaveInventory
     when ManageIQ::Providers::DatawarehouseManager          then save_ems_datawarehouse_inventory(ems, hashes, target)
     end
   end
-
+ 
   #
   # Shared between Cloud and Infra
   #
