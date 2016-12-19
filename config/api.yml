@@ -35,9 +35,13 @@
     - :post
     - :patch
     - :delete
+    :pg: &pg
+    - :put
+    - :get
 :collections:
   :physical_servers:
     :description: Physical Servers
+    :identifier: physical_server
     :options:
     - :collection
     :verbs: *g
