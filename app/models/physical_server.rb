@@ -2,6 +2,8 @@ class PhysicalServer < ApplicationRecord
   include NewWithTypeStiMixin
   include_concern 'Operations'
 
+  include_concern 'Operations'
+
   acts_as_miq_taggable
   belongs_to :ext_management_system, :foreign_key => :ems_id, :class_name => "ManageIQ::Providers::PhysicalInfraManager"
   has_many :firmwares, :foreign_key => "ph_server_uuid", :primary_key => "uuid"
