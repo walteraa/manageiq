@@ -17,13 +17,24 @@ module Api
       else
         super
       end
-    
-    def turn_on_loc_led_resource(server)
-      task_id = queue_object_action(server, desc, :method_name => "turn_on_loc_led", :role => "ems_operations")
-      action_result(true, desc, :task_id => task_id)
-      rescue => err
-        action_result(false, err.to_s)
     end
+
+    def turn_on_loc_led_resource(type, id, _data)
+      $lenovo_log.info("#{type} #{id} #{_data}")
+      raise BadRequestError, "Must specify an id for starting a #{type} resource" unless id
+
+      api_action(type, id) do |klass|
+        server = resource_search(id, type, klass)
+        api_log_info("Starting #{klass} #{server}")
+        api_log_info(" #{server_ident(server)}")
+        desc = "Turn on Loc LED"
+        task_id = queue_object_action(server, desc, :method_name => "turn_on_loc_led", :role => "ems_operations")
+        action_result(true, desc, :task_id => task_id)
+
+      end
+    end
+
+      
 
     def turn_off_loc_led_resource(server)
       task_id = queue_object_action(server, desc, :method_name => "turn_off_loc_led", :role => "ems_operations")
@@ -31,5 +42,12 @@ module Api
       rescue => err
         action_result(false, err.to_s)
     end
-  end
+
+   private
+
+   def server_ident(vm)
+      "VM id:#{vm.id} name:'#{vm.name}'"
+    end
+  
+  end 
 end

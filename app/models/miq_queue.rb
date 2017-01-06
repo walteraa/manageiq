@@ -340,6 +340,7 @@ class MiqQueue < ApplicationRecord
       begin
         status = STATUS_OK
         message = "Message delivered successfully"
+        _log.info(" Target ID: #{ target_id.nil?} Class: #{obj.kind_of?(Class)} inst:#{instance_id} class:#{class_name} obj:#{obj} requestorid:#{requester}  #{requester.respond_to?(:id)}")
         Timeout.timeout(msg_timeout) do
           if obj.kind_of?(Class) && !target_id.nil?
             result = obj.send(method_name, target_id, *args)

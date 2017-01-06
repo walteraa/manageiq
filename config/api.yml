@@ -44,10 +44,30 @@
     :identifier: physical_server
     :options:
     - :collection
-    :verbs: *g
+    :verbs: *gp
     :klass: PhysicalServer
     :subcollections:
     - :firmwares
+    :collection_actions:
+      :post:
+      - :name: power_on
+        :identifier: physical_server_power_on
+      - :name: power_off
+        :identifier: physical_server_power_off
+      - :name: turn_on_loc_led
+        :identifier: physical_server_turn_on_loc_led
+      - :name: turn_off_loc_led
+        :identifier: physical_server_turn_off_loc_led
+    :resource_actions:
+      :post:
+      - :name: power_on
+        :identifier: physical_server_power_on
+      - :name: power_off
+        :identifier: physical_server_power_off
+      - :name: turn_on_loc_led
+        :identifier: physical_server_turn_on_loc_led
+      - :name: turn_off_loc_led
+        :identifier: physical_server_turn_off_loc_led
   :ems_events:
      :description: LXCA Events
      :options:
@@ -1969,7 +1989,7 @@
       - :name: query
         :identifier: vm_show_list
       - :name: add
-        :identifier: vm_miq_request_new
+        :identifier: vm_miq_request_splat
         :disabled: true
       - :name: edit
         :identifier: vm_edit
@@ -1984,9 +2004,9 @@
         :identifier: vm_guest_shutdown
       - :name: reboot_guest
         :identifier: vm_guest_restart
-      - :name: start
-        :identifier: vm_start
-      - :name: stop
+      - :name: start_splat
+        :identifier: vm_start_splat
+      - :name: stop_splat
         :identifier: vm_stop
       - :name: suspend
         :identifier: vm_suspend
@@ -2032,9 +2052,9 @@
         :identifier: vm_guest_shutdown
       - :name: reboot_guest
         :identifier: vm_guest_restart
-      - :name: start
+      - :name: start_splat
         :identifier: vm_start
-      - :name: stop
+      - :name: stop_splat
         :identifier: vm_stop
       - :name: suspend
         :identifier: vm_suspend
