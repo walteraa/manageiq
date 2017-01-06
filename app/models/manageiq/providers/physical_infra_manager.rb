@@ -12,5 +12,9 @@ module ManageIQ::Providers
     def self.description
       @description ||= "PhysicalInfraManager".freeze
     end
+
+    def turn_on_loc_led(server, options = {})
+      $lenovo_log.info("In Physical InfraManager turn_on_loc_led")
+    end
   end
 end

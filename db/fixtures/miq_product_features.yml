@@ -25,6 +25,33 @@
       :feature_type: node
       :identifier: templates_images_filter_accord
 
+# Physical server access rules
+  - :name: Physical Server Access Rules
+    :description: Access Rules for Physical Servers
+    :feature_type: node
+    :identifier: physical_server
+    :children:
+    #- :name: View
+    #  :description: View Physical Servers
+    #  :feature_type: view
+    #  :identifier: physical_server_view
+    #  :children:
+    #  - :name: Show
+    #    :description: Display Individual Physical Servers
+    #    :feature_type: view
+    #    :identifier: physical_server_show
+    - :name: Operate
+      :description: Perform Operations on Physical Servers
+      :feature_type: control
+      :identifier: physical_server_control
+      :children:
+      - :name: Turn On LED
+        :description: Turn On Loc LED
+        :feature_type: control
+        :identifier: physical_server_turn_on_loc_led
+
+      
+
 # VM Explorer
 - :name: Virtual Machines
   :description: Virtual Machine Views
