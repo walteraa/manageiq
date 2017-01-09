@@ -16,13 +16,16 @@ class PhysicalServer < ApplicationRecord
   end
 
   def my_zone
+   
     ems = ext_management_system
     ems ? ems.my_zone : MiqServer.my_zone
   end
 
+
   def turn_on_loc_led
+   $lenovo_log.info("Management System Name: #{ext_management_system.name}")
    unless ext_management_system
-      raise _(" A Server <%{name}> with Id: <%{id}> is not associated with a provider.") % {:name => name, :id => id}
+      raise _(" A Server #{self} <%{name}> with Id: <%{id}> is not associated with a provider.") % {:name => name, :id => id}
     end
     $lenovo_log.info("Turn on LED splat")
     verb = :turn_on_loc_led
