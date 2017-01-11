@@ -49,7 +49,18 @@
         :description: Turn On Loc LED
         :feature_type: control
         :identifier: physical_server_turn_on_loc_led
-
+      - :name: Turn On Server
+        :description: Turn On Server
+        :feature_type: control
+        :identifier: physical_server_power_on        
+      - :name: Turn Off Server
+        :description: Turn Off Server
+        :feature_type: control
+        :identifier: physical_server_power_off  
+      - :name: Restart Server
+        :description: Restart Server
+        :feature_type: control
+        :identifier: physical_server_restart
       
 
 # VM Explorer
