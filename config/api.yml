@@ -1607,6 +1607,10 @@
       :get:
       - :name: read
         :identifier: vm_snapshot_view
+    :subresource_actions:
+      :get:
+      - :name: read
+        :identifier: vm_snapshot_view
   :software:
     :description: Software
     :options:
