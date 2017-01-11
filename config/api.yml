@@ -1597,6 +1597,16 @@
       :get:
       - :name: read
         :identifier: ops_settings
+  :snapshots:
+    :description: Snapshots
+    :options:
+    - :subcollection
+    :verbs: *g
+    :klass: Snapshot
+    :subcollection_actions:
+      :get:
+      - :name: read
+        :identifier: vm_snapshot_view
   :software:
     :description: Software
     :options:
@@ -1890,6 +1900,7 @@
     - :accounts
     - :custom_attributes
     - :software
+    - :snapshots
     :collection_actions:
       :get:
       - :name: read
