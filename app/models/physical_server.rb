@@ -2,8 +2,6 @@ class PhysicalServer < ApplicationRecord
   include NewWithTypeStiMixin
   include_concern 'Operations'
 
-  #include_concern 'Operations'
-
   acts_as_miq_taggable
   belongs_to :ext_management_system, :foreign_key => :ems_id, :class_name => "ManageIQ::Providers::PhysicalInfraManager"
   has_many :firmwares, :foreign_key => "ph_server_uuid", :primary_key => "uuid"
@@ -62,7 +60,6 @@ class PhysicalServer < ApplicationRecord
     $lenovo_log.info("Turn off LED")
   end
 
-<<<<<<< HEAD
   def is_refreshable?
     refreshable_status[:show]
   end
@@ -85,6 +82,4 @@ class PhysicalServer < ApplicationRecord
     true
   end
 
-=======
->>>>>>> 029afe9... Merge branch 'development' into refactoring-upgrade
 end
