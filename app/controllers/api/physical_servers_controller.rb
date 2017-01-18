@@ -51,7 +51,7 @@ module Api
 
     private
 
-    def change_resource_state(state, type, id, _data)
+    def change_resource_state(state, type, id)
       $lenovo_log.info("Change the stae of resource: #{type} instance: #{id}")
       raise BadRequestError, "Must specify an id for starting a #{type} resource" unless id
 
