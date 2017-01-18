@@ -1601,7 +1601,7 @@
     :description: Snapshots
     :options:
     - :subcollection
-    :verbs: *gp
+    :verbs: *gpd
     :klass: Snapshot
     :subcollection_actions:
       :get:
@@ -1614,6 +1614,12 @@
       :get:
       - :name: read
         :identifier: vm_snapshot_view
+      :post:
+      - :name: delete
+        :identifier: vm_snapshot_delete
+      :delete:
+      - :name: delete
+        :identifier: vm_snapshot_delete
   :software:
     :description: Software
     :options:
