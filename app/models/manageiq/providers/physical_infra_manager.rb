@@ -12,5 +12,13 @@ module ManageIQ::Providers
     def self.description
       @description ||= "PhysicalInfraManager".freeze
     end
+
+    def validate_authentication_status
+      {:available => true, :message => nil}
+    end
+
+    def validate_import_vm
+      false
+    end
   end
 end
