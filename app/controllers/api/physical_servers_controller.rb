@@ -8,6 +8,7 @@ module Api
         response_payload = physical_server.as_json
         firmwares = physical_server.firmwares.map(&:as_json)
         response_payload["firmwares"] = firmwares
+        response_payload['host'] = physical_server.host.id
 
         render json: response_payload
       else
