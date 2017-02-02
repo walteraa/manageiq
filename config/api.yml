@@ -36,6 +36,22 @@
     - :patch
     - :delete
 :collections:
+  :physical_servers:
+    :description: Physical Servers
+    :options:
+    - :collection
+    :verbs: *g
+    :klass: PhysicalServer
+    :subcollections:
+    - :firmwares 
+  :firmwares:
+    :description: Firmwares
+    :options:
+    - :collection
+    - :subcollection
+    :verbs: *g
+    :klass: Firmware
+    :identifier: firmwares
   :accounts:
     :description: Accounts
     :options:
