@@ -15,4 +15,29 @@ class PhysicalServer < ApplicationRecord
       :name => name,
     }
   end
+
+
+  def is_refreshable?
+    refreshable_status[:show]
+  end
+
+  def is_refreshable_now?
+    refreshable_status[:enabled]
+  end
+
+  def is_refreshable_now_error_message
+    refreshable_status[:message]
+  end
+
+  def is_available?(address)
+    #TODO (walteraa) remove bypass
+    true
+  end
+
+  def smart?
+    #TODO (walteraa) remove bypass
+    true
+  end
+
+
 end
