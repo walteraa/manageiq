@@ -13,9 +13,9 @@ class PhysicalServer < ApplicationRecord
     }
   end
 
-  def my_zone
-    ems = ext_management_system
-    ems ? ems.my_zone : MiqServer.my_zone
+  def my_zone 
+    ems = ext_management_system 
+    ems ? ems.my_zone : MiqServer.my_zone 
   end
 
   def turn_on_loc_led

@@ -13,7 +13,7 @@ module Api
                                       else physical_server.host.id
                                       end
 
-        render :json=> response_payload
+        render json=> response_payload
       else
         super
       end
