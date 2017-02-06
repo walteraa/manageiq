@@ -1,7 +1,7 @@
 module Api
   class PhysicalServersController < BaseController
     include Subcollections::Firmwares
-  
+
     def show
       if params[:c_id]
         physical_server = PhysicalServer.find(params[:c_id])
@@ -13,7 +13,7 @@ module Api
                                       else physical_server.host.id
                                       end
 
-        render json=> response_payload
+        render :json=> response_payload
       else
         super
       end

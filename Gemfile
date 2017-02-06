@@ -98,7 +98,6 @@ gem "websocket-driver",               "~>0.6.3"
 gem "foreman_api_client",             ">=0.1.0",   :require => false, :git => "https://github.com/ManageIQ/foreman_api_client.git", :branch => "master"
 gem "ruport",                         "=1.7.0",                       :git => "https://github.com/ManageIQ/ruport.git", :tag => "v1.7.0-3"
 
-
 #To Lenovo provider
 gem "uuid"
 gem "xclarity_client"          

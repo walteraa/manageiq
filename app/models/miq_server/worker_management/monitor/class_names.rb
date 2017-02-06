@@ -122,11 +122,7 @@ module MiqServer::WorkerManagement::Monitor::ClassNames
     ManageIQ::Providers::Openstack::InfraManager::RefreshWorker
     ManageIQ::Providers::StorageManager::CinderManager::RefreshWorker
     ManageIQ::Providers::StorageManager::SwiftManager::RefreshWorker
-<<<<<<< HEAD
     ManageIQ::Providers::Lenovo::PhysicalInfraManager::RefreshWorker
-=======
-		ManageIQ::Providers::Lenovo::PhysicalInfraManager::RefreshWorker
->>>>>>> 7cd25f6c5278da30edfe9aae878a28aee33d3987
     ManageIQ::Providers::Vmware::CloudManager::RefreshWorker
     ManageIQ::Providers::Vmware::NetworkManager::RefreshWorker
     ManageIQ::Providers::Vmware::InfraManager::RefreshWorker
