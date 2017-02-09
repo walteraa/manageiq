@@ -98,11 +98,8 @@ gem "foreman_api_client",             ">=0.1.0",   :require => false, :git => "h
 gem "ruport",                         "=1.7.0",                       :git => "https://github.com/ManageIQ/ruport.git", :tag => "v1.7.0-3"
 
 gem "uuid"
-<<<<<<< HEAD
 
 #To Lenovo provider
-=======
->>>>>>> 9402044... Merge pull request #3 from lenovo/revert-1-enable_power_ops_merge
 gem "xclarity_client"
 gem "manageiq-providers-lenovo", git: "git://github.com/ManageIQ/manageiq-providers-lenovo"
 
