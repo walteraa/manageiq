@@ -10,6 +10,20 @@ class ServiceTemplate < ApplicationRecord
     "storage"         => _("Storage")
   }.freeze
 
+
+  CATALOG_ITEM_TYPES = {
+    "amazon"                => _("Amazon"),
+    "azure"                 => _("Azure"),
+    "generic"               => _("Generic"),
+    "generic_orchestration" => _("Orchestration"),
+    "generic_ansible_tower" => _("AnsibleTower"),
+    "google"                => _("Google"),
+    "microsoft"             => _("SCVMM"),
+    "openstack"             => _("OpenStack"),
+    "redhat"                => _("RHEV"),
+    "vmware"                => _("VMware")
+  }
+
   include ServiceMixin
   include OwnershipMixin
   include NewWithTypeStiMixin
@@ -330,7 +344,9 @@ class ServiceTemplate < ApplicationRecord
                  ae_endpoint[:fqname]
                end
 
-      build_options = {:action => action[:name], :fqname => fqname}
+      build_options = {:action        => action[:name],
+                       :fqname        => fqname,
+                       :ae_attributes => {:service_action => action[:name]}}
       build_options.merge!(ae_endpoint.slice(:dialog,
                                              :dialog_id,
                                              :configuration_template,

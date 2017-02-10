@@ -81,14 +81,23 @@ module MiqReport::Generator
   end
 
   def get_include_for_find
-    (include_as_hash || {}).deep_merge(include_for_find || {}).presence
+    (include_as_hash.presence || invent_includes).deep_merge(include_for_find || {}).presence
+  end
+
+  def invent_includes
+    return {} unless col_order
+    col_order.each_with_object({}) do |col, ret|
+      next unless col.include?(".")
+      *rels, _col = col.split(".")
+      rels.inject(ret) { |h, rel| h[rel.to_sym] ||= {} } unless col =~ /managed\./
+    end
   end
 
   def include_as_hash(includes = include, klass = nil)
     if klass.nil?
       klass = db_class
       result = {}
-      cols.each { |c| result.merge!(c.to_sym => {}) if klass.virtual_attribute?(c) || klass == LiveMetric } if cols
+      cols.each { |c| result.merge!(c.to_sym => {}) if klass.virtual_attribute?(c) } if cols
     end
 
     if includes.kind_of?(Hash)

@@ -73,26 +73,20 @@ class MiqAlert < ApplicationRecord
 
   def self.assigned_to_target(target, event = nil)
     # Get all assigned, enabled alerts based on target class and event
-    cond = "enabled = ? AND db = ?"
-    args = [true, target.class.base_model.name]
-    key  = "#{target.class.base_model.name}_#{target.id}"
 
-    unless event.nil?
-      cond += " AND responds_to_events LIKE ?"
-      args << "%#{event}%"
-      key += "_#{event}"
-    end
+    # event can be nil, so the compact removes event if it is nil
+    key  = [target.class.base_model.name, target.id, event].compact.join("_")
 
     alert_assignments[key] ||= begin
       profiles  = MiqAlertSet.assigned_to_target(target)
-      alert_ids = profiles.collect { |p| p.members.pluck(:id) }.flatten.uniq
+      alert_ids = profiles.flat_map { |p| p.members.pluck(:id) }.uniq
 
       if alert_ids.empty?
-        []
+        none
       else
-        cond += " AND id IN (?)"
-        args << alert_ids
-        where(cond, *args).to_a
+        scope = where(:id => alert_ids, :enabled => true, :db => target.class.base_model.name)
+        scope = scope.where("responds_to_events like ?", "%#{event}%") if event
+        scope
       end
     end
   end
@@ -198,15 +192,16 @@ class MiqAlert < ApplicationRecord
     # If we are alerting, invoke the alert actions, then add a status so we can limit how often to alert
     # Otherwise, destroy this alert's statuses for our target
     invoke_actions(target, inputs) if result
-    add_status_post_evaluate(target, result)
+    add_status_post_evaluate(target, result, inputs[:description])
 
     result
   end
 
-  def add_status_post_evaluate(target, result)
+  def add_status_post_evaluate(target, result, status_description)
     status = miq_alert_statuses.find_or_initialize_by(:resource => target)
     status.result = result
     status.ems_id = target.try(:ems_id)
+    status.description = status_description || description
     status.evaluated_on = Time.now.utc
     status.save
     miq_alert_statuses << status

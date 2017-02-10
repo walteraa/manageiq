@@ -38,12 +38,43 @@
 :collections:
   :physical_servers:
     :description: Physical Servers
+    :identifier: physical_server
     :options:
     - :collection
-    :verbs: *g
+    :verbs: *gp
     :klass: PhysicalServer
     :subcollections:
-    - :firmwares 
+    - :firmwares
+    :collection_actions:
+      :post:
+      - :name: power_on
+        :identifier: physical_server_power_on
+      - :name: power_off
+        :identifier: physical_server_power_off
+      - :name: restart
+      - :identifier: physical_server_restart
+      - :name: turn_on_loc_led
+        :identifier: physical_server_turn_on_loc_led
+      - :name: turn_off_loc_led
+        :identifier: physical_server_turn_off_loc_led
+    :resource_actions:
+      :post:
+      - :name: power_on
+        :identifier: physical_server_power_on
+      - :name: power_off
+        :identifier: physical_server_power_off
+      - :name: restart
+        :identifier: physical_server_restart
+      - :name: turn_on_loc_led
+        :identifier: physical_server_turn_on_loc_led
+      - :name: turn_off_loc_led
+        :identifier: physical_server_turn_off_loc_led
+  :ems_events:
+     :description: LXCA Events
+     :options:
+     - :collection
+     :verbs: *g
+     :klass: EmsEvent
   :firmwares:
     :description: Firmwares
     :options:
@@ -67,11 +98,25 @@
     :collection_actions:
       :get:
       - :name: read
-        :identifier: configuration_script_view
+        :identifier: embedded_configuration_script_payload_view
     :resource_actions:
       :get:
       - :name: read
-        :identifier: configuration_script_view
+        :identifier: embedded_configuration_script_payload_view
+  :configuration_script_sources:
+    :description: Configuration Script Source
+    :options:
+    - :collection
+    :verbs: *g
+    :klass: ConfigurationScriptSource
+    :collection_actions:
+      :get:
+      - :name: read
+        :identifier: embedded_configuration_script_source_view
+    :resource_actions:
+      :get:
+      - :name: read
+        :identifier: embedded_configuration_script_source_view
   :auth:
     :description: REST API Authentication
     :options:
@@ -611,6 +656,7 @@
     - :collection
     :subcollections:
     - :load_balancers
+    - :snapshots
     :collection_actions:
       :get:
       - :name: read
@@ -659,6 +705,25 @@
       :get:
       - :name: show
         :identifier: load_balancer_show
+    :snapshots_subcollection_actions:
+      :get:
+      - :name: read
+        :identifier: cloud_volume_snapshot_view
+      :post:
+      - :name: create
+        :identifier: cloud_volume_snapshot_create
+      - :name: delete
+        :identifier: cloud_volume_snapshot_delete
+    :snapshots_subresource_actions:
+      :get:
+      - :name: read
+        :identifier: cloud_volume_snapshot_view
+      :post:
+      - :name: delete
+        :identifier: cloud_volume_snapshot_delete
+      :delete:
+      - :name: delete
+        :identifier: cloud_volume_snapshot_delete
   :load_balancers:
     :description: Load Balancers
     :options:
@@ -1568,6 +1633,8 @@
         :identifier: service_admin
       - :name: assign_tags
         :identifier: service_tag
+      - :name: unassign_tags
+        :identifier: service_tag
     :resource_actions:
       :get:
       - :name: read
@@ -1621,25 +1688,6 @@
     - :subcollection
     :verbs: *gpd
     :klass: Snapshot
-    :subcollection_actions:
-      :get:
-      - :name: read
-        :identifier: vm_snapshot_view
-      :post:
-      - :name: create
-        :identifier: vm_snapshot_add
-      - :name: delete
-        :identifier: vm_snapshot_delete
-    :subresource_actions:
-      :get:
-      - :name: read
-        :identifier: vm_snapshot_view
-      :post:
-      - :name: delete
-        :identifier: vm_snapshot_delete
-      :delete:
-      - :name: delete
-        :identifier: vm_snapshot_delete
   :software:
     :description: Software
     :options:
@@ -1985,6 +2033,8 @@
         :identifier: vm_delete
       - :name: assign_tags
         :identifier: vm_tag
+      - :name: unassign_tags
+        :identifier: vm_tag
     :resource_actions:
       :get:
       - :name: read
@@ -2062,6 +2112,25 @@
         :identifier: vm_protect
       - :name: resolve
         :identifier: vm_policy_sim
+    :snapshots_subcollection_actions:
+      :get:
+      - :name: read
+        :identifier: vm_snapshot_view
+      :post:
+      - :name: create
+        :identifier: vm_snapshot_add
+      - :name: delete
+        :identifier: vm_snapshot_delete
+    :snapshots_subresource_actions:
+      :get:
+      - :name: read
+        :identifier: vm_snapshot_view
+      :post:
+      - :name: delete
+        :identifier: vm_snapshot_delete
+      :delete:
+      - :name: delete
+        :identifier: vm_snapshot_delete
   :zones:
     :description: Zones
     :identifier: zone

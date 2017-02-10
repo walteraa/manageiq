@@ -23,5 +23,6 @@ module ManageIQ::Providers
     def validate_import_vm
       false
     end
+
   end
 end
