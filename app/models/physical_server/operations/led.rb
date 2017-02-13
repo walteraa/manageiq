@@ -12,11 +12,10 @@ module PhysicalServer::Operations::Led
   end
 
   private
-
+  
   def change_state(verb)
     unless ext_management_system
-      raise _("A Server #{self} <%{name}> with Id: <%{id}> is not associated \
-with a provider.") % {:name => name, :id => id}
+      raise _("A Server #{self} <%{name}> with Id: <%{id}> is not associated with a provider.") % {:name => name, :id => id}
     end
 
     options = {:uuid => uuid}
@@ -24,4 +23,5 @@ with a provider.") % {:name => name, :id => id}
     ext_management_system.send(verb, self, options)
     $lenovo_log.info("Complete #{verb} #{self}")
   end
+
 end
