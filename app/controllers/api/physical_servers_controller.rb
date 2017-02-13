@@ -63,6 +63,5 @@ module Api
     def server_ident(server)
       "Server instance: #{server.id} name:'#{server.name}'"
     end
-
   end
 end
