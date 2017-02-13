@@ -400,7 +400,7 @@ module MiqReport::Generator
     result = build_apply_display_filter(result) unless display_filter.nil?
 
     @table = Ruport::Data::Table.new(:data => result, :column_names => column_names)
-    @table.reorder(column_names) unless @table.data.length == 0
+    @table.reorder(column_names) unless @table.data.empty?
 
     # Remove any resource columns that were added earlier to col_order so they won't appear in the report
     col_order.delete_if { |c| res_cols.include?(c) && !orig_col_order.include?(c) } if res_cols
@@ -430,7 +430,7 @@ module MiqReport::Generator
     only_cols = options[:only] || (self.cols + generate_cols + build_cols_from_include(include)).uniq
     column_names = result.empty? ? self.cols : result.first.keys
     @table = Ruport::Data::Table.new(:data => result, :column_names => column_names)
-    @table.reorder(only_cols) unless @table.data.length == 0
+    @table.reorder(only_cols) unless @table.data.empty?
 
     build_sort_table
   end
@@ -438,11 +438,11 @@ module MiqReport::Generator
   def get_data_from_report(rpt)
     raise _("Report table is nil") if rpt.table.nil?
 
-    rpt_data = if db_options[:row_col] && db_options[:row_val]
-                 rpt.table.find_all { |d| d.data.key?(db_options[:row_col]) && (d.data[db_options[:row_col]] == db_options[:row_val]) }.collect(&:data)
-               else
-                 rpt.table.collect(&:data)
-               end
+    if db_options[:row_col] && db_options[:row_val]
+      rpt.table.find_all { |d| d.data.key?(db_options[:row_col]) && (d.data[db_options[:row_col]] == db_options[:row_val]) }.collect(&:data)
+    else
+      rpt.table.collect(&:data)
+    end
   end
 
   def generate_rows_from_data(data)
@@ -815,7 +815,7 @@ module MiqReport::Generator
   end
 
   def table_has_records?
-    table.length > 0
+    !table.empty?
   end
 
   def queue_timeout
