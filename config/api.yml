@@ -460,6 +460,14 @@
       :post:
       - :name: query
         :identifier: miq_cloud_networks_view
+    :subcollection_actions:
+      :get:
+      - :name: read
+        :identifier: miq_cloud_networks_view
+    :subresource_actions:
+      :get:
+      - :name: read
+        :identifier: miq_cloud_networks_view
   :clusters:
     :description: Clusters
     :identifier: ems_cluster
@@ -881,10 +889,6 @@
         :identifier: instance_guest_restart
       - :name: reset
         :identifier: instance_reset
-    :load_balancers_subcollection_actions:
-      :get:
-      - :name: show
-        :identifier: load_balancer_show
     :snapshots_subcollection_actions:
       :get:
       - :name: read
@@ -919,6 +923,14 @@
       - :name: query
         :identifier: load_balancer_show_list
     :resource_actions:
+      :get:
+      - :name: read
+        :identifier: load_balancer_show
+    :subcollection_actions:
+      :get:
+      - :name: read
+        :identifier: load_balancer_show
+    :subresource_actions:
       :get:
       - :name: read
         :identifier: load_balancer_show
@@ -1171,14 +1183,6 @@
         :identifier: ems_infra_protect
       - :name: unassign
         :identifier: ems_infra_protect
-    :cloud_networks_subcollection_actions:
-      :get:
-      - :name: show
-      - :identifier: miq_cloud_networks_view
-    :load_balancers_subcollection_actions:
-      :get:
-      - :name: show
-        :identifier: load_balancer_show
   :provision_dialogs:
     :description: Provisioning Dialogs
     :identifier: miq_ae_customization_explorer
@@ -1495,7 +1499,7 @@
     - :subcollection
     :verbs: *gp
     :klass: MiqSchedule
-    :collection_actions:
+    :subcollection_actions:
       :get:
       - :name: read
         :identifier: miq_report_view

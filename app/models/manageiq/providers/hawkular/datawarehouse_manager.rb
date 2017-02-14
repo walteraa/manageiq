@@ -9,7 +9,9 @@ module ManageIQ::Providers
     include AuthenticationMixin
 
     DEFAULT_PORT = 80
-    default_value_for :port, DEFAULT_PORT
+    default_value_for :port do |provider|
+      provider.port || DEFAULT_PORT
+    end
 
     def verify_credentials(_auth_type = nil, options = {})
       connect(options).fetch_version_and_status
@@ -58,6 +60,10 @@ module ManageIQ::Providers
 
     def supported_auth_types
       %w(default auth_key)
+    end
+
+    def required_credential_fields(_type)
+      [:auth_key]
     end
 
     def supports_authentication?(authtype)
