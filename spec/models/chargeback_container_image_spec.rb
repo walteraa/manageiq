@@ -26,7 +26,8 @@ describe ChargebackContainerImage do
 
   before do
     MiqRegion.seed
-    ChargebackRate.seed
+    ChargebackRateDetailMeasure.seed
+    ChargeableField.seed
 
     EvmSpecHelper.create_guid_miq_server_zone
     @node = FactoryGirl.create(:container_node, :name => "node")

@@ -7,7 +7,7 @@ class ChargebackRateDetail < ApplicationRecord
 
   default_scope { order(:group => :asc, :description => :asc) }
 
-  validates :group, :source, :chargeback_rate, :presence => true
+  validates :group, :source, :chargeback_rate, :chargeable_field, :presence => true
   validate :contiguous_tiers?
 
   delegate :rate_type, :to => :chargeback_rate, :allow_nil => true
@@ -58,7 +58,7 @@ class ChargebackRateDetail < ApplicationRecord
   def find_rate(value)
     fixed_rate = 0.0
     variable_rate = 0.0
-    tier_found = chargeback_tiers.detect { |tier| tier.includes?(value / rate_adjustment) }
+    tier_found = chargeback_tiers.detect { |tier| tier.includes?(value * rate_adjustment) }
     unless tier_found.nil?
       fixed_rate = tier_found.fixed_rate
       variable_rate = tier_found.variable_rate

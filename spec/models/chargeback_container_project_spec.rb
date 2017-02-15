@@ -31,7 +31,8 @@ describe ChargebackContainerProject do
 
   before do
     MiqRegion.seed
-    ChargebackRate.seed
+    ChargebackRateDetailMeasure.seed
+    ChargeableField.seed
 
     EvmSpecHelper.create_guid_miq_server_zone
     @project = FactoryGirl.create(:container_project, :name => "my project", :ext_management_system => ems,
